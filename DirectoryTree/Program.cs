@@ -9,27 +9,35 @@ namespace DirectoryTree
 {
     class Program
     {
-        static string DirectoriesTree(string path)
+        static List<string> DirectoriesTree(string path, List<string> resultList)
         {
             string[] dirs = Directory.GetDirectories(path);
+
+            if (resultList == null)
+            {
+                resultList = new List<string>();
+            }
 
             if (dirs.Length != 0)
             {
                 foreach (string dir in dirs)
                 {
-                    DirectoriesTree(dir);
-                    Console.WriteLine(dir);
+                    resultList.Add(dir);
+                    DirectoriesTree(dir, resultList);
                 }
             }
-            return path;
+            return resultList;
         }
 
     static void Main(string[] args)
         {
             Console.WriteLine("Enter path:");
             string path = Console.ReadLine();
-
-            Console.WriteLine(DirectoriesTree(path));
+            List<string> resultList = new List<string>();
+            foreach (string dirPath in DirectoriesTree(path, resultList))
+            {
+                Console.WriteLine(dirPath);
+            }
             Console.ReadKey();
         }
 

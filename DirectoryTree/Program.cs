@@ -9,7 +9,7 @@ namespace DirectoryTree
 {
     class Program
     {
-        static List<string> DirectoriesTree(string path, List<string> resultList)
+        static List<string> DirectoriesTree(string path, List<string> resultList = null)
         {
             string[] dirs = Directory.GetDirectories(path);
 
@@ -33,8 +33,8 @@ namespace DirectoryTree
         {
             Console.WriteLine("Enter path:");
             string path = Console.ReadLine();
-            List<string> resultList = new List<string>();
-            foreach (string dirPath in DirectoriesTree(path, resultList))
+           // List<string> resultList = new List<string>();
+            foreach (string dirPath in DirectoriesTree(path))
             {
                 Console.WriteLine(dirPath);
             }
